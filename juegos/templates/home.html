@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% load humanize %}
+{% block content %}
+
+<h1 class="text-center mb-5 mt-4">Catálogo de Juegos de Mesa</h1>
+
+<div class="container text-center">
+  <div class="row d-flex flex-row align-items-center">
+    {% for juego in juegos %}     
+      <article class="card mx-2 my-2" style="width:12rem; height:22rem;">
+        <a target="_blank" class="card-title link-underline link-underline-opacity-0"  href="{{juego.url}}">    
+          <img class="card-img-top mt-2 mb-2" src="{{juego.imagen_url}}" alt="{{juego.juego}}" style="height: 12rem; object-fit:contain">
+          <h6 class="card-title">{{juego.juego}}</h6>
+          <p class="card-subtitle">${{juego.precio|intcomma}}</p>
+          <p class="card-subtitle">{{juego.tienda}}</p>
+        </a> 
+      </article>  
+       
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container text-center p-3 mb-3 bg-secondary text-white">
+  <div class="pagination d-inline-flex justify-content-center">
+    <span class="step-links">
+      
+
+      {% for i in juegos.paginator.page_range %}
+        {% if juegos.number == i %}
+          <span class="current">{{ i }}</span>
+        {% else %}
+          <a class="link-light" href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+      {% endfor %}
+
+      
+    </span>
+  </div>
+</div>
+{% endblock content %}

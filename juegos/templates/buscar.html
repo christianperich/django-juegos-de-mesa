@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load humanize %}
+{% block content %}
+
+<h1 class="text-center mb-5 mt-4">Resultados de búsqueda para "{{txt}}" </h1>
+
+<div class="container text-center">
+  <div class="row d-flex flex-row align-items-center">
+    {% for juego in juegos %} 
+    <article class="card mx-2 my-2" style="width:12rem; height:22rem;">
+      <a target="_blank" class="card-title link-underline link-underline-opacity-0"  href="{{juego.url}}">    
+        <img class="card-img-top mt-2 mb-2" src="{{juego.imagen_url}}" alt="{{juego.juego}}" style="height: 12rem; object-fit:contain">
+        <h6 class="card-title">{{juego.juego}}</h6>
+        <p class="card-subtitle">${{juego.precio|intcomma}}</p>
+        <p class="card-subtitle">{{juego.tienda}}</p>
+      </a> 
+    </article>    
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
